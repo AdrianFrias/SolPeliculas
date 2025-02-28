@@ -1,0 +1,52 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>AgregarPelicula</title>
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <script src="~/Scripts/bootstrap.js"></script>
+
+</head>
+<body>
+    <div class="container">
+        <h1>Agregar Pelicula</h1>
+        @if (TempData["ERROR"] != null)
+        {
+            <div class="alert alert-danger">
+                <b>Ocurrio un error: </b>@(TempData["ERROR"])
+            </div>
+        }
+        <!--multipart/form-data se usa cuando se envian archivos con formularios -->
+        <form action="/Home/AgregarPelicula" method="post" enctype="multipart/form-data">
+            <!--Recordar que los nombres de las entradas deben ser iguales que las de las propiedades de la entidade-->
+            <label>Nombre</label>
+            @*@Html.TextBox("Nombre", null, new { @class = "form-control", required = "required" })*@
+            <input type="text" name="Nombre" id="Nombre" />
+
+            <br />
+            <label>Genero</label>
+            @*@Html.TextBox("Genero", null, new { @class = "form-control", required = "required" })*@
+            <input type="text" name="Genero" id="Genero" />
+
+            <br />
+            <label>Fecha de lanzamiento</label>
+            @*@Html.TextBox("FechaLanzamiento", null, new { @class = "form-control", required = "required", Type = "datetime-local" })*@
+            <input type="datetime-local" name="FechaLanzamiento" id="FechaLanzamiento" />
+
+            <br />
+            <label>Imagen</label>
+            <input type="file" name="archivoImagen" id="archivoImagen" />
+            <!--Html.TextBox("archivoImagen", null, new { class = "form-control", required = "required", Type = "file" })-->
+            <br />
+            <a href="/Home/Index" class="btn btn-secondary">Regresar</a>
+            <input type="submit" value="Agregar" class="btn btn-success" />
+        </form>
+    </div>
+</body>
+</html>

@@ -1,0 +1,44 @@
+﻿@using Entidades
+@model E_Pelicula
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>EliminarProducto</title>
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <script src="~/Scripts/bootstrap.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h1>Eliminar Pelicula</h1>
+        @if (TempData["ERROR"] != null)
+        {
+            <div class="alert alert-danger">
+                <b>Ocurrio un error: </b>@(TempData["ERROR"])
+            </div>
+        }
+    <form action="/Home/EliminarPelicula" method="post">
+        <!--Recordar que los nombres de las entradas deben ser iguales que las de las propiedades de la entidade-->
+        <input type="hidden" name="IDPelicula" value="@Model.IDPelicula" />
+        <label>Nombre</label>
+        @Html.TextBox("Nombre", Model.Nombre, new { @class = "form-control", @readonly = true })
+        <br />
+        <label>Genero</label>
+        @Html.TextBox("Genero", Model.Genero, new { @class = "form-control", @readonly = true })
+        <br />
+        <label>Fecha de lanzamiento</label>
+        @Html.TextBox("FechaLanzamiento", Model.FechaLanzamiento.ToString("yyyy-MM-dd"), new { @class = "form-control", @readonly = true, Type = "date" })
+        <br />
+        <label>¿Desea Eliminar la pelicula de la base de datos?</label>
+        <br />
+        <input type="submit" name="Eliminar" value="Cancelar" class="btn btn-primary"/>
+        <input type="submit" name="Eliminar" value="Confirmar" class="btn btn-success"/>
+    </form>
+    </div>
+</body>
+</html>
