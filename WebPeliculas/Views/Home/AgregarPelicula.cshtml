@@ -26,22 +26,23 @@
         <form action="/Home/AgregarPelicula" method="post" enctype="multipart/form-data">
             <!--Recordar que los nombres de las entradas deben ser iguales que las de las propiedades de la entidade-->
             <label>Nombre</label>
-            @*@Html.TextBox("Nombre", null, new { @class = "form-control", required = "required" })*@
-            <input type="text" name="Nombre" id="Nombre" />
+            @Html.TextBox("Nombre", null, new { @class = "form-control", required = "required" })
+            @*<input type="text" name="Nombre" id="Nombre" />*@
 
             <br />
             <label>Genero</label>
             @*@Html.TextBox("Genero", null, new { @class = "form-control", required = "required" })*@
-            <input type="text" name="Genero" id="Genero" />
+            @*<input type="text" name="Genero" id="Genero" />*@
+            @Html.DropDownList("IDGeneroPelicula", new SelectList(ViewBag.CatalogoGeneros, "IDGeneroPelicula", "Genero"),
+                "Seleccione un genero", new { @class = "form-control" })
 
-            <br />
             <label>Fecha de lanzamiento</label>
-            @*@Html.TextBox("FechaLanzamiento", null, new { @class = "form-control", required = "required", Type = "datetime-local" })*@
-            <input type="datetime-local" name="FechaLanzamiento" id="FechaLanzamiento" />
+            @Html.TextBox("FechaLanzamiento", null, new { @class = "form-control", required = "required", Type = "datetime-local" })
+            @*<input type="datetime-local" name="FechaLanzamiento" id="FechaLanzamiento" />*@
 
             <br />
             <label>Imagen</label>
-            <input type="file" name="archivoImagen" id="archivoImagen" />
+            <input type="file" name="archivoImagen" id="archivoImagen" class="form-control" required/>
             <!--Html.TextBox("archivoImagen", null, new { class = "form-control", required = "required", Type = "file" })-->
             <br />
             <a href="/Home/Index" class="btn btn-secondary">Regresar</a>

@@ -22,21 +22,35 @@
                 <b>Ocurrio un error: </b>@(TempData["ERROR"])
             </div>
         }
-        <form action="/Home/EditarPelicula" method="post">
-            <!--Recordar que los nombres de las entradas deben ser iguales que las de las propiedades de la entidade-->
-            <input type="hidden" name="IDPelicula" value="@Model.IDPelicula"/>
-            <label>Nombre</label>
-            @Html.TextBox("Nombre", Model.Nombre, new { @class = "form-control", required = "required" })
+    <form action="/Home/EditarPelicula" method="post" enctype="multipart/form-data">
+        <!--Recordar que los nombres de las entradas deben ser iguales que las de las propiedades de la entidade-->
+        <input type="hidden" name="IDPelicula" value="@Model.IDPelicula" />
+        <label>Nombre</label>
+        @Html.TextBox("Nombre", Model.Nombre, new { @class = "form-control", required = "required" })
+        <br />
+        <label>Genero</label>
+        @*@Html.TextBox("Genero", Model.Genero, new { @class = "form-control", required = "required" })*@
+        @Html.DropDownList("IDGeneroPelicula", new SelectList(ViewBag.CatalogoGeneros, "IDGeneroPelicula", "Genero", Model.IDGeneroPelicula),
+        "Selecciona un valor", new { @class = "form-control" })
+        <br />
+        <label>Fecha de lanzamiento</label>
+        @Html.TextBox("FechaLanzamiento", Model.FechaLanzamiento.ToString("yyyy-MM-ddTHH:mm"), new { @class = "form-control", required = "required", Type = "datetime-local" })
+
+        <br />
+        @if (!string.IsNullOrEmpty(Model.nombreImagen))
+        {
+            <label>Imagen actual:</label>
             <br />
-            <label>Genero</label>
-            @Html.TextBox("Genero", Model.Genero, new { @class = "form-control", required = "required" })
-            <br />
-            <label>Fecha de lanzamiento</label>
-            @Html.TextBox("FechaLanzamiento", Model.FechaLanzamiento.ToString("yyyy-MM-dd"), new { @class = "form-control", required = "required", Type = "date" })
-            <br />
-            <a href="/Home/Index" class="btn btn-secondary">Regresar</a>
-            <input type="submit" value="Actualizar" class="btn btn-success"/>
-        </form>
+            <img src="~/Imagenes/@Model.nombreImagen" alt="Imagen actual" style="height:250px" />
+        }
+        <br />
+        <label>Seleccionar nueva imagen:</label>
+        <input type="file" name="archivoImagen" id="archivoImagen" class="form-control" />
+        <br />
+
+        <a href="/Home/Index" class="btn btn-secondary">Regresar</a>
+        <input type="submit" value="Actualizar" class="btn btn-success" />
+    </form>
     </div>
 </body>
 </html>

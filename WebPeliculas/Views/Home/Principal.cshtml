@@ -25,34 +25,42 @@
         {
             <div class="alert alert-danger"><b>@TempData["ERROR"]</b></div>
         }
-        <a href="/Home/VistaAgregar" class="btn btn-primary">Agregar</a>
+        <a href="/Home/VistaAgregar" class="btn btn-success">Agregar</a>
+        <a href="/Home/VistaGeneros" class="btn btn-dark">Generos</a>
+
+        <form method="get" action="/Home/Buscar">
+            @Html.DropDownList("Buscador", new SelectList(ViewBag.CatalogoGeneros, "IDGeneroPelicula", "Genero"),
+            "Todos los generos", new { @class = "form-control" })
+            <input type="submit" value="Buscar" class="btn btn-warning">
+        </form>
+
 
         @*<table class="table table-striped table-hover table-bordered text-center">
-                <thead class="table-success">
-                    <tr>
-                        <th>ID</th>
-                        <th>nombre</th>
-                        <th>Genero</th>
-                        <th>Fecha Lanzamiento</th>
-                        <th>Imagen</th>
-                        <th colspan="2">Acciones</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (E_Pelicula pelicula in Model)
-                    {
-                    <tr>
-                        <td>@pelicula.IDPelicula</td>
-                        <td>@pelicula.Nombre</td>
-                        <td>@pelicula.Genero</td>
-                        <td>@pelicula.FechaLanzamiento.ToString("yyyy-MMMM-dd")</td>
-                        <td>@pelicula.nombreImagen</td>
-                        <td><a href="/Home/VistaEditar/?ID=@pelicula.IDPelicula" class="btn btn-primary">Editar</a></td>
-                        <td><a href="/Home/VistaEliminar/?ID=@pelicula.IDPelicula" class="btn btn-danger">Eliminar</a></td>
-                    </tr>
-                    }
-                </tbody>
-            </table>*@
+            <thead class="table-success">
+                <tr>
+                    <th>ID</th>
+                    <th>nombre</th>
+                    <th>Genero</th>
+                    <th>Fecha Lanzamiento</th>
+                    <th>Imagen</th>
+                    <th colspan="2">Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (E_Pelicula pelicula in Model)
+                {
+                <tr>
+                    <td>@pelicula.IDPelicula</td>
+                    <td>@pelicula.Nombre</td>
+                    <td>@pelicula.Genero</td>
+                    <td>@pelicula.FechaLanzamiento.ToString("yyyy-MMMM-dd")</td>
+                    <td>@pelicula.nombreImagen</td>
+                    <td><a href="/Home/VistaEditar/?ID=@pelicula.IDPelicula" class="btn btn-primary">Editar</a></td>
+                    <td><a href="/Home/VistaEliminar/?ID=@pelicula.IDPelicula" class="btn btn-danger">Eliminar</a></td>
+                </tr>
+                }
+            </tbody>
+        </table>*@
         <div class="row">
             @foreach (E_Pelicula pelicula in Model)
             {
@@ -64,7 +72,8 @@
                             <p>@pelicula.Genero</p>
                             <p><b>Fecha de lanzamiento</b>@pelicula.FechaLanzamiento</p>
 
-                            <a href="#" class="btn btn-primary">Go somewhere</a>
+                            <a href="/Home/VistaEditar/?ID=@pelicula.IDPelicula" class="btn btn-primary">Editar</a>
+                            <a href="/Home/VistaEliminar/?ID=@pelicula.IDPelicula" class="btn btn-danger">Eliminar</a>
                         </div>
                     </div>
                 </div>

@@ -48,5 +48,12 @@ namespace Business
             D_Pelicula datos = new D_Pelicula();
             datos.DeletePelicula(pelicula.IDPelicula);
         }
+        public List<E_Pelicula> BuscadorGenero(int idgenero)
+        {
+            D_Pelicula datos = new D_Pelicula();
+            List<E_Pelicula> coincidencias = new List<E_Pelicula>();
+            coincidencias = datos.ReadBuscador(idgenero);
+            return coincidencias;
+        }
     }
 }

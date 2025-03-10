@@ -150,6 +150,10 @@
     <Content Include="Views\Home\AgregarPelicula.cshtml" />
     <Content Include="Views\Home\EditarPelicula.cshtml" />
     <Content Include="Views\Home\EliminarPelicula.cshtml" />
+    <Content Include="Views\Home\GenerosPrincipal.cshtml" />
+    <Content Include="Views\Home\EditarGenero.cshtml" />
+    <Content Include="Views\Home\AgregarGenero.cshtml" />
+    <Content Include="Views\Home\EliminarGenero.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

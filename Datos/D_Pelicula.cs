@@ -74,7 +74,9 @@ namespace Datos
                     pelicula.IDPelicula = Convert.ToInt32(reader["idPelicula"]);
                     pelicula.Nombre = Convert.ToString(reader["nombre"]);
                     pelicula.Genero = Convert.ToString(reader["genero"]);
+                    pelicula.IDGeneroPelicula = Convert.ToInt32(reader["idGeneroPelicula"]);
                     pelicula.FechaLanzamiento = Convert.ToDateTime(reader["fechalanzamiento"]);
+                    pelicula.nombreImagen = Convert.ToString(reader["nombreImagen"]);
                 }
             }
             catch (Exception ex)
@@ -86,6 +88,40 @@ namespace Datos
                 conexion.Close();
             }
             return pelicula;
+        }
+        public List<E_Pelicula> ReadBuscador(int idgenero)
+        {
+            SqlConnection conexion = new SqlConnection(CadenaConexion);
+            List<E_Pelicula> encontrados = new List<E_Pelicula>();
+            try
+            {
+                conexion.Open();
+                SqlCommand comando = new SqlCommand("spGeneroBuscar", conexion);
+                comando.CommandType = CommandType.StoredProcedure;
+                comando.Parameters.AddWithValue("@sp_buscador", idgenero);
+                SqlDataReader reader = comando.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    E_Pelicula pelicula = new E_Pelicula();
+                    pelicula.IDPelicula = Convert.ToInt32(reader["idPelicula"]);
+                    pelicula.Nombre = Convert.ToString(reader["nombre"]);
+                    pelicula.Genero = Convert.ToString(reader["genero"]);
+                    pelicula.IDGeneroPelicula = Convert.ToInt16(reader["idGeneroPelicula"]);
+                    pelicula.FechaLanzamiento = Convert.ToDateTime(reader["fechalanzamiento"]);
+                    pelicula.nombreImagen = Convert.ToString(reader["nombreImagen"]);
+                    encontrados.Add(pelicula);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                conexion.Close();
+            }
+            return encontrados;
         }
         /// <summary>
         /// Create, Agrega peliculas a la base de datos
@@ -100,7 +136,7 @@ namespace Datos
                 SqlCommand comando = new SqlCommand("spAgregarPelicula", conexion);
                 comando.CommandType = CommandType.StoredProcedure;
                 comando.Parameters.AddWithValue("@sp_nombre", pelicula.Nombre);
-                comando.Parameters.AddWithValue("@sp_genero", pelicula.Genero);
+                comando.Parameters.AddWithValue("@sp_idGeneropelicula", pelicula.IDGeneroPelicula);
                 comando.Parameters.AddWithValue("@sp_fecha", pelicula.FechaLanzamiento);
                 comando.Parameters.AddWithValue("@sp_nombreImagen", pelicula.nombreImagen);
 
@@ -129,8 +165,9 @@ namespace Datos
                 comando.CommandType = CommandType.StoredProcedure;
                 comando.Parameters.AddWithValue("@sp_id", pelicula.IDPelicula);
                 comando.Parameters.AddWithValue("@sp_nombre", pelicula.Nombre);
-                comando.Parameters.AddWithValue("@sp_genero", pelicula.Genero);
+                comando.Parameters.AddWithValue("@sp_idgenero", pelicula.IDGeneroPelicula);
                 comando.Parameters.AddWithValue("@sp_fecha", pelicula.FechaLanzamiento);
+                comando.Parameters.AddWithValue("@sp_nombreimagen", pelicula.nombreImagen);
                 comando.ExecuteNonQuery();
             }
             catch (Exception ex)

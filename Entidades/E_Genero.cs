@@ -6,14 +6,9 @@ using System.Threading.Tasks;
 
 namespace Entidades
 {
-    public class E_Pelicula
+    public class E_Genero
     {
-        //Propiedades simples
-        public int IDPelicula { get; set; }
-        public string Nombre { get; set; }
         public int IDGeneroPelicula { get; set; }
         public string Genero { get; set; }
-        public DateTime FechaLanzamiento { get; set; }
-        public string nombreImagen { get; set; }
     }
 }

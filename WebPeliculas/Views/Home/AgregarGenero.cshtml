@@ -1,0 +1,34 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>AgregarGenero</title>
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <script src="~/Scripts/bootstrap.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h1>Agregar Genero</h1>
+        @if (TempData["ERROR"] != null)
+        {
+            <div class="alert alert-danger">
+                <b>Ocurrio un error: </b>@(TempData["ERROR"])
+            </div>
+        }
+        <form method="post" action="/Home/AgregarGenero">
+            <label>Ingrese genero</label>
+            <br />
+            @Html.TextBox("Genero", null, new { @class = "form-control", required = "required" })
+            <a href="/Home/VistaGeneros" class="btn btn-secondary">Regresar</a>
+            <input type="submit" value="Agregar" class="btn btn-success" />
+        </form>
+
+    </div>
+</body>
+</html>

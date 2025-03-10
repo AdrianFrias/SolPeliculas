@@ -34,10 +34,17 @@
         <label>Fecha de lanzamiento</label>
         @Html.TextBox("FechaLanzamiento", Model.FechaLanzamiento.ToString("yyyy-MM-dd"), new { @class = "form-control", @readonly = true, Type = "date" })
         <br />
+        @if (!string.IsNullOrEmpty(Model.nombreImagen))
+        {
+            <label>Imagen actual:</label>
+            <br />
+            <img src="~/Imagenes/@Model.nombreImagen" alt="Imagen actual" style="height:250px" />
+        }
+        <br />
         <label>¿Desea Eliminar la pelicula de la base de datos?</label>
         <br />
-        <input type="submit" name="Eliminar" value="Cancelar" class="btn btn-primary"/>
-        <input type="submit" name="Eliminar" value="Confirmar" class="btn btn-success"/>
+        <input type="submit" name="Eliminar" value="Cancelar" class="btn btn-primary" />
+        <input type="submit" name="Eliminar" value="Confirmar" class="btn btn-success" />
     </form>
     </div>
 </body>

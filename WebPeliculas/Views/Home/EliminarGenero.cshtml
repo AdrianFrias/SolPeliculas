@@ -1,0 +1,33 @@
+﻿@using Entidades
+@model E_Genero
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>EliminarGenero</title>
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <script src="~/Scripts/bootstrap.js"></script>  
+</head>
+<body>
+    <div class="container">
+        <h1>Eliminar Genero</h1>
+        @if (TempData["ERROR"] != null)
+        {
+            <div class="alert alert-danger">
+                <b>Ocurrio un error: </b>@(TempData["ERROR"])
+            </div>
+        }
+        <form method="post" action="/Home/EliminarGenero">
+            <input type="hidden" value="@Model.IDGeneroPelicula" name="IDGeneroPelicula" />
+            @Html.TextBox("Genero", Model.Genero, new { @class = "form-control", @readonly = true })
+            <a href="/Home/VistaGeneros" class="btn btn-secondary">Regresar</a>
+            <input type="submit" value="Eliminar" class="btn btn-success" />
+        </form>
+    </div>
+</body>
+</html>

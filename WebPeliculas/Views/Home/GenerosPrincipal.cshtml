@@ -1,0 +1,52 @@
+﻿@using Entidades
+@model List<E_Genero>
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>GenerosPrincipal</title>
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <script src="~/Scripts/bootstrap.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h1 class="text-center">Lista de generos</h1>
+        @if (TempData["ERROR"] != null)
+        {
+            <b>@TempData["ERROR"]</b>
+        }
+        @if (TempData["mensaje"] != null)
+        {
+            <div class="alert alert-success"><b>@TempData["mensaje"]</b></div>
+        }
+        <a href="/Home/Index" class="btn btn-secondary">Regresar</a>
+        <a href="/Home/VistaAgregarGenero" class="btn btn-primary">Agregar</a>
+
+        <table class="table table-striped table-hover table-bordered text-center" style="width: 50%;margin:0 auto;">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Genero</th>
+                    <th colspan="2">Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (E_Genero genero in Model)
+                {
+                    <tr>
+                        <td>@genero.IDGeneroPelicula</td>
+                        <td>@genero.Genero</td>
+                        <td><a href="/Home/VistaEditarGenero/?ID=@genero.IDGeneroPelicula" class="btn btn-primary">Editar</a></td>
+                        <td><a href="/Home/VistaEliminarGenero/?ID=@genero.IDGeneroPelicula" class="btn btn-danger">Eliminar</a></td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
